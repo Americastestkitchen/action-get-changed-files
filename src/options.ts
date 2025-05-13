@@ -2,6 +2,7 @@ export interface Options {
   foldersOnly?: boolean
   ignore?: string
   format?: Format
+  targetDirectory?: string
 }
 
 export type Format = 'json' | 'csv' | 'newline'
@@ -13,4 +14,5 @@ export interface Context {
   }
   before: string
   after: string
+  targetDirectory?: string
 }

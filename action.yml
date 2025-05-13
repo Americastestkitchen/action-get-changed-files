@@ -16,6 +16,9 @@ inputs:
   ignore:
     required: false
     description: 'glob files/folders to ignore'
+  target-directory:
+    required: false
+    description: 'target directory to get changed subdirectories from'
 runs:
   using: 'node16'
   main: 'dist/index.js'

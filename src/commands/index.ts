@@ -1,6 +1,7 @@
 export * from './command'
 export * from './get-files'
 export * from './get-folders'
+export * from './get-subdirectories'
 export * from './ignore'
 export * from './format-command'
 export * from './factory'

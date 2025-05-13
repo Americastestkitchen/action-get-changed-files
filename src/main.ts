@@ -16,6 +16,7 @@ async function run(): Promise<void> {
     const foldersOnly = core.getInput('foldersOnly', {required: false})
     const format = core.getInput('format')
     const debug = core.getInput('debug')
+    const targetDirectory = core.getInput('target-directory', {required: false})
     const githubOptions: Options = {}
 
     if (debug === 'true') {
@@ -25,7 +26,8 @@ async function run(): Promise<void> {
     const options = {
       foldersOnly: foldersOnly === 'true',
       ignore: ignoreGlob,
-      format: format as any
+      format: format as any,
+      targetDirectory: targetDirectory || undefined
     }
 
     const commands = commandFactory.make(options)
@@ -38,14 +40,16 @@ async function run(): Promise<void> {
         innerContext = {
           repo: context.repo,
           after: context.payload.after,
-          before: context.payload.before
+          before: context.payload.before,
+          targetDirectory: targetDirectory
         }
         break
       case 'pull_request':
         innerContext = {
           repo: context.repo,
           after: context.payload.pull_request!.head.sha,
-          before: context.payload.pull_request!.base.sha
+          before: context.payload.pull_request!.base.sha,
+          targetDirectory: targetDirectory
         }
         break
       default:

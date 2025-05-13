@@ -2,6 +2,7 @@ import { ICommand } from './command';
 import { Format, Options } from '../options';
 import { GetFoldersCommand, GetFilesCommand, IgnoreCommand, CsvFormatCommand, NewlineFormatCommand, JsonFormatCommand } from '.';
 import { DeduplicateCommand } from './deduplicate';
+import { GetSubdirectoriesCommand } from './get-subdirectories';
 
 class CommandFactory {
   constructor() {
@@ -11,7 +12,10 @@ class CommandFactory {
   make(options: Options): ICommand[] {
     const commands: ICommand[] = []
 
-    if(options.foldersOnly) {
+    if(options.targetDirectory) {
+      commands.push(new GetSubdirectoriesCommand(options.targetDirectory))
+    }
+    else if(options.foldersOnly) {
       commands.push(new GetFoldersCommand())
     }
     else {
