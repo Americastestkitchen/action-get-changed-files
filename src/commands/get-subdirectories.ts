@@ -8,7 +8,7 @@ export class GetSubdirectoriesCommand implements ICommand {
     if (!this.targetDirectory) {
       return [];
     }
-    console.log(files)
+    console.log("addressing the files:", files)
     return files
       .filter(file => file.filename.startsWith(`${this.targetDirectory}/`) || file.filename.startsWith(`${this.targetDirectory}`))
       .map(file => {
